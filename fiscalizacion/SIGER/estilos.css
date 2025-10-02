@@ -1,0 +1,43 @@
+/* CSS Document */
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table {     
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 9px;    
+	margin: 5px;     
+	text-align: left;    
+	border-collapse: collapse; 
+}
+
+th {
+	font-size: 13px;     
+	font-weight: bold;     
+	padding: 8px;     
+	background: #FD5053;
+    border-top: 4px solid #E6060A;    
+	border-bottom: 1px solid #fff; 
+	color: #FAF2F2; 
+}
+
+td {    
+	padding: 8px;     
+	background: #FAF2F2;     
+	border-bottom: 1px solid #fff;
+    color: #000000;    
+	border-top: 1px solid transparent; 
+}
+
+tr:hover td { 
+	background: #FAAFB0; 
+	color: #339; 
+}
+
+tfoot {
+	font-weight: bold;     
+	background: #666666;
+	color:#0000FF;
+}
+

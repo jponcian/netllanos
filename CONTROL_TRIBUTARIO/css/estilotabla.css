@@ -1,0 +1,58 @@
+#documentosregistrodoc table,table td,table tr{
+	padding:0;
+	border-spacing:0;
+}
+
+#documentosregistrodoc table{
+	border:1px solid #000;
+	border-radius:5px;
+	min-width:400px;
+	font-family:Helvetica,Arial;
+}
+
+#documentosregistrodoc table td{
+	padding:6px;
+}
+
+#documentosregistrodoc table tr:first-child td:first-child{
+	border-radius:5px 0 0;
+}
+
+#documentosregistrodoc table tr:first-child td:last-child{
+	border-radius:0 5px 0 0;
+}
+
+#documentosregistrodoc table tr:last-child td:first-child{
+	border-radius:0 0 0 5px;
+}
+
+#documentosregistrodoc table tr:last-child td:last-child{
+	border-radius:0 0 5px;
+}
+
+#documentosregistrodoc table td:not(:last-child){
+	border-right:1px #666 solid;
+}
+
+#documentosregistrodoc table tr:nth-child(2n){
+	background:#e2ecb3;
+}
+
+#documentosregistrodoc table tr:nth-child(2n+1){
+	background:#ff200a;
+}
+
+#documentosregistrodoc table:not(.header) tr{
+	text-align:left;
+}
+
+#documentosregistrodoc table.header tr:first-child{
+	font-weight:700;
+	color:#fff;
+	background-color:#444;
+	border-bottom:1px #000 solid;
+}
+
+#documentosregistrodoc table.header tr:nth-child(n+2){
+	text-align:right
+}

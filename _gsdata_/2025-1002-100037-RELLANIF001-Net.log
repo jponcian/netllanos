@@ -1,0 +1,16 @@
+2025-10-02 10:00:44: == Sync Started by User Command
+2025-10-02 10:00:44: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-02 10:00:44: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-02 10:00:44: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-02 10:00:44: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-02 10:00:44: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-02 10:00:44: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/funciones/firmabienes.php' -> '//rellanif023/c$/wamp/www/funciones/firmabienes.php' (961)
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/bienes/3tabla.php' -> '//rellanif023/c$/wamp/www/bienes/3tabla.php' (7,834)
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/menu_bienes.php' -> '//rellanif023/c$/wamp/www/menu_bienes.php' (5,851)
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/bienes/8_tabla_resultados.php' -> '//rellanif023/c$/wamp/www/bienes/8_tabla_resultados.php' (3,342)
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/bienes/5_combo.php' -> '//rellanif023/c$/wamp/www/bienes/5_combo.php' (4,885)
+2025-10-02 10:00:45: Copy Over 'C:/wamp/www/netlosllanos/bienes/formatos/x_memorando_reasignacion.php' -> '//rellanif023/c$/wamp/www/bienes/formatos/x_memorando_reasignacion.php' (8,113)
+2025-10-02 10:00:45: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-10-02 10:00:46: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-10-02 10:00:57: == Sync Complete. Time: 00:00:13, Speed: 0.00/s, OK: 6, Errors: 0

@@ -1,0 +1,299 @@
+<?php
+session_start();
+include "../conexion.php";
+include "../auxiliar.php";
+
+if ($_SESSION['VERIFICADO'] != "SI") {
+	header("Location: index.php?errorusuario=val");
+	exit();
+}
+
+$acceso = 74;
+//------- VALIDACION ACCESO USUARIO
+include "../validacion_usuario.php";
+//-----------------------------------
+
+if ($_POST['OSEDE'] > 0 and $_POST['OANNO'] > 0 and $_POST['ONUMERO'] > 0) {
+	$_SESSION['ANNO_PRO'] = $_POST['OANNO'];
+	$_SESSION['NUM_PRO'] = $_POST['ONUMERO'];
+	$_SESSION['SEDE'] = $_POST['OSEDE'];
+}
+
+if ($_POST['CMDAPROBAR'] == "Emitir Nueva Resoluci�n") {
+	//------- PARA BUSCAR EL EXPEDIENTE
+	include "0_buscar_acta_y_prov.php";
+
+	//------- PARA BUSCAR LA RESOLUCION
+	$consulta_y = "SELECT id_resolucion FROM resoluciones WHERE id_sector=" . $_SESSION['SEDE'] . " AND id_origen=2 AND anno_expediente=" . $_SESSION['ANNO_PRO'] . " AND num_expediente=" . $_SESSION['NUM_PRO'] . ";";
+	$tabla_y = mysql_query($consulta_y);
+	$registro_y = mysql_fetch_object($tabla_y);
+	$id_resolucion = $registro_y->id_resolucion;
+
+	// COPIA DE LOS DATOS DEL EXPEDIENTE
+	$consulta = "INSERT INTO  `expedientes_especiales_historial` (id_resolucion, `Numero` ,`Anno` ,`Rif` ,`FechaRegistro` ,`Coordinador` ,`Funcionario` ,`Fecha_proceso` ,`Usuario` ,`Sector` ,`Status` ,`fecha_conclusion` ,`fecha_aprobacion` ,`fecha_transferencia`)
+VALUES ( '" . $id_resolucion . "', '" . $_SESSION['NUM_PRO'] . "',  '" . $_SESSION['ANNO_PRO'] . "',  '" . $registro_acta->Rif . "',  '" . $registro_acta->FechaRegistro . "',  '" . $registro_acta->Coordinador . "',  '" . $registro_acta->Funcionario . "', NOW() ,  '" . $registro_acta->Usuario . "',  '" . $_SESSION['SEDE'] . "',  '" . $registro_acta->Status . "', '" . $registro_acta->fecha_conclusion . "',  '" . $registro_acta->fecha_aprobacion . "',  '" . $registro_acta->fecha_transferencia . "');";
+	$tabla = mysql_query($consulta);
+
+	// ACTUALIZACION DE LAS LIQUIDACIONES
+	$consulta = "UPDATE liquidacion SET id_resolucion=" . $id_resolucion . ", usuario=" . $_SESSION['CEDULA_USUARIO'] . " WHERE sector=" . $_SESSION['SEDE'] . " AND anno_expediente=" . $_SESSION['ANNO_PRO'] . " AND num_expediente=" . $_SESSION['NUM_PRO'] . " AND origen_liquidacion=2;";
+	$tabla = mysql_query($consulta);
+
+	// ACTUALIZACION DEL EXPEDIENTE
+	$consulta = "UPDATE expedientes_especiales SET status=0, fecha_conclusion= null, fecha_aprobacion= null, fecha_transferencia = null, usuario=" . $_SESSION['CEDULA_USUARIO'] . " WHERE id_expediente=" . $registro_acta->id_expediente . ";";
+	$tabla = mysql_query($consulta);
+
+	// ACTUALIZACION DE LA RESOLUCION
+	$consulta = "UPDATE resoluciones SET historial=1 WHERE id_resolucion=" . $id_resolucion . ";";
+	$tabla = mysql_query($consulta);
+
+	// MENSAJE
+	echo "<script type=\"text/javascript\">alert('Expediente Actualizado Exitosamente!!!');</script>";
+
+	//-- CAMBIO DE LA DIRECCION
+	echo '<meta http-equiv="refresh" content="0";/>';
+}
+?>
+<html>
+
+<head>
+	<title>Aprobar Expediente</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<script type='text/JavaScript' src='../funciones/scw_normal.js'></script>
+	</script>
+</head>
+<style type="text/css">
+	<!--
+	.Estilomenun {
+		font-family: Verdana, Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		font-weight: bold;
+	}
+
+	body {
+		background-image: url();
+	}
+
+	.Estilo7 {
+		font-size: 18px;
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+
+	.Estilo15 {
+		font-size: 14px;
+	}
+	-->
+</style>
+
+<body style="background: transparent !important;">
+
+	<p>
+		<?php include "../titulo.php"; ?>
+	</p>
+	<div align="center">
+		<p align="center">&nbsp;
+			<?php
+			include "menu.php";
+			?>
+	</div>
+	<form name="form1" method="post" action="#vista">
+		<table width="47%" border="1" align="center">
+			<tr>
+				<td height="35" align="center" bgcolor="#FF0000" colspan="6">
+					<p class="Estilo7"><u>Selecci�n del Expediente a generar la Resoluci&oacute;n</u></p>
+					<p class="Estilo7">(El expediente debe estar transferido)</p>
+				</td>
+			</tr>
+			<tr>
+				<td height="34" bgcolor="#CCCCCC">
+					<div align="center"><strong>Dependencia:</strong></div>
+				</td>
+				<td bgcolor="#FFFFFF">
+					<div align="center"><span class="Estilo1">
+							<select name="OSEDE" size="1" onChange="this.form.submit()">
+								<option value="-1">Seleccione</option>
+								<?php
+								if ($_SESSION['ADMINISTRADOR'] > 0) {
+									$consulta_x = 'SELECT sector as id_sector, nombre FROM vista_exp_especiales where status=7 GROUP BY sector;';
+									$tabla_x = mysql_query($consulta_x);
+									while ($registro_x = mysql_fetch_array($tabla_x)) {
+										echo '<option ';
+										if ($_POST['OSEDE'] == $registro_x['id_sector']) {
+											echo 'selected="selected" ';
+										}
+										echo ' value=' . $registro_x['id_sector'] . '>' . $registro_x['nombre'] . '</option>';
+									}
+								} else {
+									$consulta_x = 'SELECT sector as id_sector, nombre FROM vista_exp_especiales WHERE status=7 and sector=' . $_SESSION['SEDE_USUARIO'] . ' GROUP BY sector;';
+									$tabla_x = mysql_query($consulta_x);
+									while ($registro_x = mysql_fetch_array($tabla_x)) {
+										echo '<option ';
+										if ($_POST['OSEDE'] == $registro_x['id_sector']) {
+											echo 'selected="selected" ';
+										}
+										echo ' value=' . $registro_x['id_sector'] . '>' . $registro_x['nombre'] . '</option>';
+									}
+								}
+								?>
+							</select>
+						</span></div>
+				</td>
+				<td bgcolor="#CCCCCC">
+					<div align="center"><strong>A&ntilde;o:</strong></div>
+				</td>
+				<td bgcolor="#FFFFFF">
+					<div align="center"><span class="Estilo1">
+							<select name="OANNO" size="1" onChange="this.form.submit()">
+								<option value="-1">Seleccione</option>
+								<?php
+								if ($_POST['OSEDE'] > 0) {
+									$consulta_x = 'SELECT anno FROM vista_exp_especiales WHERE status=7 and sector=0' . $_POST['OSEDE'] . ' GROUP BY anno;';
+									$tabla_x = mysql_query($consulta_x);
+									while ($registro_x = mysql_fetch_array($tabla_x)) {
+										echo '<option ';
+										if ($_POST['OANNO'] == $registro_x['anno']) {
+											echo 'selected="selected" ';
+										}
+										echo ' value=' . $registro_x['anno'] . '>' . $registro_x['anno'] . '</option>';
+									}
+								}
+								?>
+							</select>
+						</span></div>
+				</td>
+				<td bgcolor="#CCCCCC">
+					<div align="center"><strong>Numero:</strong></div>
+				</td>
+				<td><label>
+						<div align="center"><span class="Estilo1">
+								<select name="ONUMERO" size="1" onChange="this.form.submit()">
+									<option value="-1">Seleccione</option>
+									<?php
+									if ($_POST['OANNO'] > 0) {
+										$consulta_x = 'SELECT numero FROM vista_exp_especiales WHERE status=7 and anno=' . $_POST['OANNO'] . ' AND sector=0' . $_POST['OSEDE'] . ';';
+										$tabla_x = mysql_query($consulta_x);
+										while ($registro_x = mysql_fetch_array($tabla_x)) {
+											echo '<option ';
+											if ($_POST['ONUMERO'] == $registro_x['numero']) {
+												echo 'selected="selected" ';
+											}
+											echo ' value=' . $registro_x['numero'] . '>' . $registro_x['numero'] . '</option>';
+										}
+									}
+									?>
+								</select>
+							</span></div>
+					</label></td>
+			</tr>
+			<tr>
+				<td colspan="6" align="center">
+					<p>
+						<?php include "../msg_validacion.php"; ?></p>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<?php
+		if ($_POST['ONUMERO'] > 0) {
+		?>
+			<table width="60%" border="1" align="center">
+				<tr>
+					<td height="36" colspan="8" align="center" bgcolor="#FF0000"><span class="Estilo7"><u>Datos del Expediente</u></span></td>
+				</tr>
+				<tr>
+					<td bgcolor="#CCCCCC">
+						<div align="center"><strong>A�o:</strong></div>
+					</td>
+					<td><label>
+							<div align="center"><span class="Estilo15">
+									<?php
+									$consulta = "SELECT * FROM vista_exp_especiales WHERE anno=0" . $_SESSION['ANNO_PRO'] . " AND numero=0" . $_SESSION['NUM_PRO'] . " AND sector =0" . $_SESSION['SEDE'] . ";";
+									$tabla = mysql_query($consulta);
+									$registro = mysql_fetch_object($tabla);
+									//----------
+									echo $registro->anno;
+									$tipo = $registro->tipo;
+									?>
+								</span>
+						</label>
+						</div>
+					</td>
+					<td bgcolor="#CCCCCC">
+						<div align="center"><strong>N&uacute;mero:</strong></div>
+					</td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo $registro->numero; ?></span>
+						</label>
+						</div>
+					</td>
+					<td bgcolor="#CCCCCC">
+						<div align="center"><strong>Fecha:</strong></div>
+					</td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo voltea_fecha($registro->FechaRegistro); ?></span>
+						</label>
+						</div>
+					</td>
+					<td bgcolor="#CCCCCC">
+						<div align="center"><strong>Sector:</strong></div>
+					</td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo strtoupper($registro->nombre); ?></span>
+						</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<table width="60%" border="1" align="center">
+				<tr>
+					<td bgcolor="#CCCCCC"><strong>Rif: </strong></td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo formato_rif($registro->rif); ?></span></div>
+						</label></td>
+					<td bgcolor="#CCCCCC"><strong>Contribuyente:</strong></td>
+					<td><label><span class="Estilo15"><?php echo $registro->contribuyente; ?></span></label></td>
+				</tr>
+				<tr>
+					<td bgcolor="#CCCCCC"><strong>Cedula:</strong></td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo formato_cedula($registro->coordinador); ?></span></div>
+						</label></td>
+					<td bgcolor="#CCCCCC"><strong>Supervisor:</strong></td>
+					<td><label><span class="Estilo15"><?php echo $registro->nombrecoordinador; ?></span></label></td>
+				</tr>
+				<tr>
+					<td bgcolor="#CCCCCC"><strong>Cedula:</strong></td>
+					<td><label>
+							<div align="center"><span class="Estilo15"><?php echo formato_cedula($registro->funcionario); ?></span></div>
+						</label></td>
+					<td bgcolor="#CCCCCC"><strong>Fiscal:</strong></td>
+					<td><label><span class="Estilo15"><?php echo $registro->nombrefuncionario; ?></span></label></td>
+				</tr>
+			</table>
+			<p></p>
+			<p>
+				<?php //include "0_actas.php";
+				?>
+			<p></p>
+			<?php $mostrarboton = 'NO';
+			$serie = "1=1";
+			include "../funciones/0_sanciones_aplicadas.php"; ?>
+			</p>
+			<p>
+
+			</p>
+			<p>
+			<div align="center"><label> <input type="submit" class="boton" name="CMDAPROBAR" value="Emitir Nueva Resoluci�n">
+				</label>
+			</div>
+			</p>
+	</form>
+	<a name="vista"></a> <?php
+						}
+							?>
+<?php include "../pie.php"; ?>
+<p>&nbsp;</p>
+</body>
+
+</html>

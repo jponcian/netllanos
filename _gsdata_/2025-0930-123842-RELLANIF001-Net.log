@@ -1,0 +1,18 @@
+2025-09-30 12:40:00: == Sync Started by User Command
+2025-09-30 12:40:00: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-30 12:40:00: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-30 12:40:00: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-30 12:40:00: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-30 12:40:00: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-30 12:40:00: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-30 12:40:00: Copy New 'C:/wamp/www/netlosllanos/utilidades/numeroaletra.php' -> '//rellanif023/c$/wamp/www/utilidades/numeroaletra.php' (7,317)
+2025-09-30 12:40:01: Delete File //rellanif023/c$/wamp/www/utilidades/enlaces_msiadmin.php
+2025-09-30 12:40:01: Copy Over 'C:/wamp/www/netlosllanos/utilidades/menu.php' -> '//rellanif023/c$/wamp/www/utilidades/menu.php' (1,372)
+2025-09-30 12:40:01: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_bienes_pendientes.php' -> '//rellanif023/c$/wamp/www/bienes/12_bienes_pendientes.php' (10,891)
+2025-09-30 12:40:01: Copy New 'C:/wamp/www/netlosllanos/bienes/16_asignar_bienes.php' -> '//rellanif023/c$/wamp/www/bienes/16_asignar_bienes.php' (1,821)
+2025-09-30 12:40:01: Copy Over 'C:/wamp/www/netlosllanos/bienes/16_combo.php' -> '//rellanif023/c$/wamp/www/bienes/16_combo.php' (2,212)
+2025-09-30 12:40:01: Copy Over 'C:/wamp/www/netlosllanos/bienes/16_rpu.php' -> '//rellanif023/c$/wamp/www/bienes/16_rpu.php' (12,072)
+2025-09-30 12:40:01: Copy Over 'C:/wamp/www/netlosllanos/bienes/16_rpu_listado.php' -> '//rellanif023/c$/wamp/www/bienes/16_rpu_listado.php' (3,042)
+2025-09-30 12:40:01: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-09-30 12:40:02: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-09-30 12:40:15: == Sync Complete. Time: 00:00:15, Speed: 0.00/s, OK: 8, Errors: 0

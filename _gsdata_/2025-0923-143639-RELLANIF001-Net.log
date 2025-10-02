@@ -1,0 +1,15 @@
+2025-09-23 14:37:06: == Sync Started by User Command
+2025-09-23 14:37:06: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-23 14:37:06: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-23 14:37:06: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-23 14:37:06: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-23 14:37:06: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-23 14:37:06: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-23 14:37:06: > Copy New 'C:/wamp/www/netlosllanos/losllanos.sql' -> '//rellanif023/c$/wamp/www/losllanos.sql' (79,472,300)
+2025-09-23 14:37:13: < Copy New 'C:/wamp/www/netlosllanos/losllanos.sql' -> '//rellanif023/c$/wamp/www/losllanos.sql' (79,472,300)
+2025-09-23 14:37:13: Copy Over 'C:/wamp/www/netlosllanos/bienes/4_guardar.php' -> '//rellanif023/c$/wamp/www/bienes/4_guardar.php' (1,377)
+2025-09-23 14:37:13: Copy Over 'C:/wamp/www/netlosllanos/bienes/4reasignacion_bien.php' -> '//rellanif023/c$/wamp/www/bienes/4reasignacion_bien.php' (7,444)
+2025-09-23 14:37:13: Copy Over 'C:/wamp/www/netlosllanos/bienes/4_bienes_por_reasignar.php' -> '//rellanif023/c$/wamp/www/bienes/4_bienes_por_reasignar.php' (3,822)
+2025-09-23 14:37:14: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-09-23 14:37:15: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-09-23 14:37:26: == Sync Complete. Time: 00:00:20, Speed: 9.94 MB/s, OK: 4, Errors: 0

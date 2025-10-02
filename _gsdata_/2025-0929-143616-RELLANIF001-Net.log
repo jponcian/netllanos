@@ -1,0 +1,21 @@
+2025-09-29 14:37:11: == Sync Started by User Command
+2025-09-29 14:37:12: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-29 14:37:12: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-29 14:37:12: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-29 14:37:12: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-29 14:37:12: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-29 14:37:12: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_bienes_pendientes.php' -> '//rellanif023/c$/wamp/www/bienes/12_bienes_pendientes.php' (10,901)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_mov_interno_bien.php' -> '//rellanif023/c$/wamp/www/bienes/11_mov_interno_bien.php' (8,405)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_combo.php' -> '//rellanif023/c$/wamp/www/bienes/11_combo.php' (1,637)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_procesar_movimiento.php' -> '//rellanif023/c$/wamp/www/bienes/12_procesar_movimiento.php' (2,966)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/13a_tabla_aceptar.php' -> '//rellanif023/c$/wamp/www/bienes/13a_tabla_aceptar.php' (3,910)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_mov_interno_sol_bien.php' -> '//rellanif023/c$/wamp/www/bienes/12_mov_interno_sol_bien.php' (5,416)
+2025-09-29 14:37:12: Copy Over 'C:/wamp/www/netlosllanos/bienes/6a_tabla_aceptar.php' -> '//rellanif023/c$/wamp/www/bienes/6a_tabla_aceptar.php' (3,617)
+2025-09-29 14:37:13: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-09-29 14:37:14: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-09-29 14:37:14: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/8anular_solicitudes.php
+2025-09-29 14:37:14: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/cobro/30_actualizar_moneda1.php
+2025-09-29 14:37:14: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/index.html
+2025-09-29 14:37:15: GsDeleteEmptyFoldersFS: /_gsdata_/_saved_/cobro
+2025-09-29 14:37:31: == Sync Complete. Time: 00:00:19, Speed: 0.00/s, OK: 7, Errors: 0

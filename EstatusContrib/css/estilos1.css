@@ -1,0 +1,64 @@
+/*
+	Color fondo: #632432;
+	Color header: 246355;
+	Color borde: 0F362D;
+	Color iluminado: 369681;
+*/
+body{
+	background-color: #632432;
+	font-family: Arial;
+	background-image:url(fondo.jpg);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+
+
+#main-container{
+	margin: 150px auto;
+	width: 600px;
+}
+.Estilo7 {
+	font-size: 28px;
+	font-weight: bold;
+	color: red;
+}
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 75%;
+}
+
+th, td{
+	padding: 20px;
+}
+
+thead{
+	background-color: #246355;
+	border-bottom: solid 5px #0F362D;
+	color: white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #369681;
+	color: Black;
+}
+.TituloTabla {
+	color:#808080;
+	background-color:#808080;
+	font-size:20px;
+	font-weight:bold;
+	height: 33px;
+}
+.TituloTablaP {
+	background-color:#808080;
+	color:#808080;
+	font-size:17px;
+	font-weight:bold;
+	height: 25px;
+	

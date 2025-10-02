@@ -1,0 +1,266 @@
+<?php
+session_start();
+
+if ($_SESSION['VERIFICADO'] != "SI") { 
+    header ("Location: ../index.php?errorusuario=val"); 
+    exit(); 
+	}
+ 
+include "../../conexion.php";
+include('../../funciones/auxiliar_php.php');
+include "../../funciones/numerosALetras.class.php";
+require('../../funciones/fpdf.php');
+
+setlocale(LC_TIME, 'sp_ES','sp', 'es');
+mysql_query("SET NAMES 'latin1'");
+
+//------- PARA ACTUALIZAR LAS PLANILLAS
+$consulta = "UPDATE liquidacion SET fecha_impresion=date(now()), status=19 WHERE secuencial<>999999 AND status=11 AND anno_expediente=".$_SESSION['ANNO_PRO']." AND num_expediente=".$_SESSION['NUM_PRO']." AND sector=".$_SESSION['SEDE']." AND origen_liquidacion=".$_SESSION['ORIGEN'];
+$tabla = mysql_query($consulta); // AND id_resolucion=0 
+//echo $consulta;
+//--------------------
+
+function extraer_caracteres($cadena)
+	{
+	$var=array();
+	$longitud=strlen($cadena);
+	for ($i=1;$i<$longitud+1;$i++) 
+		{
+		$var[$i]=substr($cadena, $i-1,1);
+		}
+	return $var;
+	}
+
+class PDF extends FPDF
+	{
+//	function Footer()
+//		{    
+//		//Posición a 1,5 cm del final
+//		$this->SetY(-15);
+//		//Arial itálica 8
+//		$this->SetFont('Times','I',9);
+//		//Color del texto en gris
+//		$this->SetTextColor(120);
+//		//Número de página
+//		$this->Cell(0,0,sistema().' '.$this->PageNo().' de {nb}',0,0,'R');
+//		}	
+	}
+
+// ENCABEZADO
+$pdf=new PDF('P','mm','nuevo');
+$pdf->AliasNbPages();
+$pdf->SetMargins(35,25,17);
+$pdf->SetDisplayMode($zoom=='real');
+$pdf->SetAutoPageBreak(1, $margin=20);
+
+//CONSULTA A LA BASE DE DATOS
+$consulta = "SELECT * FROM vista_liquidacion_planillas WHERE secuencial<>999999 AND anno_expediente=".$_SESSION['ANNO_PRO']." AND num_expediente=".$_SESSION['NUM_PRO']." AND sector=".$_SESSION['SEDE']." AND origen_liquidacion=".$_SESSION['ORIGEN'];
+$tabla = mysql_query($consulta); // AND id_resolucion=0
+
+while ($registro = mysql_fetch_object($tabla))
+{
+	//--- COMIENZO DEL REPORTE
+	$pdf->AddPage();
+	setlocale(LC_TIME, 'sp_ES','sp', 'es');
+	$pdf->SetFont('Times','',12);
+	//--- TIPO TRIBUTO
+	//----- PRIMERO SE EVALUAN LOS FRACCIONAMIENTOS
+	$codigo = $registro->forma;
+	
+//	if ($registro->serie==41)
+//		{
+//		$codigo = $registro->id_tributo;
+//		}
+//	else
+//		{
+//		if ($registro->concepto=="MULTA")
+//			{
+//			$codigo = 1;
+//			}
+//		else
+//			{
+//			$codigo = 32;
+//			}
+//		}
+		
+	$codigo = sprintf("%002s", $codigo);
+	//LEEMOS EN ARRAY
+	$codigo = str_replace("/", "", $codigo);
+	$tributo = extraer_caracteres($codigo);
+	//IMPRIMIMOS EL TRIBUTO
+	$pdf->SetXY(124,20);
+	$pdf->Cell(5,5,$tributo[1],0,0,'C');
+	$pdf->Cell(5,5,$tributo[2],0,0,'C');
+	
+	//IMPRIMIMOS EL NUMERO DE NOTIFICACION
+	$numero = $registro->numeronotificacion;
+	$num_notificacion = extraer_caracteres($numero);
+	$pdf->SetXY(38,36);
+	$i=1;
+	while ($i<=10)
+		{
+		$pdf->Cell(5.5,5,$num_notificacion[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS EL RIF
+	$numerorif = $registro->rif;
+	$rif = extraer_caracteres($numerorif);
+	$pdf->SetXY(152,36);
+	$i=1;
+	while ($i<=10)
+		{
+		$pdf->Cell(5.5,5,$rif[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS EL PERIODO INICIAL
+	$periodoinicial = str_replace("/", "", date('d/m/Y', strtotime($registro->periodoinicio)));
+	$inicio = extraer_caracteres($periodoinicial);
+	$pdf->SetXY(88,42);
+	$i=1;
+	while ($i<=8)
+		{
+		$pdf->Cell(5.5,5,$inicio[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS EL PERIODO FINAL
+	$periodofinal = str_replace("/", "", date('d/m/Y', strtotime($registro->periodofinal)));
+	$fin = extraer_caracteres($periodofinal);
+	$pdf->SetXY(160,42);
+	$i=1;
+	while ($i<=8)
+		{
+		$pdf->Cell(5.5,5,$fin[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS EL NOMBRE DEL CONTRIBUYENTE
+	$pdf->SetXY(33,48);
+	$pdf->Cell(0,5,$registro->contribuyente,0,0,'L');
+	
+	//IMPRIMIMOS CODIGO DE LA REGION
+	$pdf->SetXY(43,54);
+	$pdf->Cell(5.5,5,'0',0,0,'C');
+	$pdf->Cell(5.5,5,'2',0,0,'C');
+	
+	//IMPRIMIMOS EL NUMERO DE LIQUIDACION
+	$numeroliq = $registro->numeroliquidacion;
+	$num_liq = extraer_caracteres($numeroliq);
+	$pdf->SetXY(85,54);
+	$i=1;
+	while ($i<=15)
+		{
+		$pdf->Cell(5.2,5,$num_liq[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS FECHA DE LIQUIDACION
+	$fecha = str_replace("/", "", date('d/m/Y', strtotime($registro->fecha_liquidacion)));
+	$fechaliq = extraer_caracteres($fecha);
+	$pdf->SetXY(59,61);
+	$i=1;
+	while ($i<=15)
+		{
+		$pdf->Cell(5.5,5,$fechaliq[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS LA PORCION
+	$porc = sprintf("%002s", $registro->porcion);
+	$porcion = extraer_caracteres($porc);
+	$pdf->SetXY(116,61);
+	$pdf->Cell(5.5,5,$porcion[1],0,0,'C');
+	$pdf->Cell(5.5,5,$porcion[2],0,0,'C');
+	
+	//IMPRIMIMOS PLAZO DE PAGO
+	$pdf->SetXY(173,61);
+	$pdf->Cell(4,5,'INMEDIATO',0,0,'C');
+	
+	// BUSCAMOS LA CUENTA POR LA SERIE
+	list ($codigocta, $concepto) = buscar_cuenta($registro->serie);
+	
+		if ($codigocta<=0)	
+			{	
+			$codigocta = $registro->cuenta;		
+			$concepto = $registro->descripcion;
+			}
+		
+	//IMPRIMIMOS CODIGO PLAN DE CUENTA
+	$cod_plan = extraer_caracteres($codigocta);
+	$pdf->SetXY(33,71);
+	$i=1;
+	while ($i<=9)
+		{
+		$pdf->Cell(5.2,5,$cod_plan[$i],0,0,'C');
+		$i++;
+		}
+	
+	//IMPRIMIMOS CONCEPTO (MULTA O INTERESES)
+	$pdf->SetXY(83,71);
+	$pdf->Cell(5.5,5,$concepto,0,0,'L');
+	
+	$monto_planilla = ($registro->monto_bs / $registro->concurrencia) * $registro->especial;
+	//IMPRIMIMOS MONTO
+	$pdf->SetXY(150,71);
+	$pdf->Cell(40,5,number_format($monto_planilla, 2, ',', '.'),0,0,'R');
+	
+	//IMPRIMIMOS TOTAL
+	$pdf->SetXY(150,94);
+	$pdf->Cell(40,5,number_format($monto_planilla, 2, ',', '.'),0,0,'R');
+	
+	//FIRMAS
+	
+	/*if ($registro->tipo >= 2000 and $registro->tipo <= 2406 and $registro->sector==1 or  $registro->sector==2 or $registro->sector==3 or  $registro->sector==4 or $registro->sector==5) {
+	include "firma.php"; 
+	}
+	else { include "firma_gerente.php";}
+	
+	//include "firma.php";*/
+	
+	
+	
+		//if ($registro->tipo >= 2000 and $registro->tipo <= 2406 and $registro->sector==1 or  $registro->sector==2 or $registro->sector==3 or  $registro->sector==4 or $registro->sector==5) {
+	if ($_SESSION['ORIGEN'] == 4)
+		{
+		if ($_SESSION['SEDE']==1)
+			{
+			$consulta1 = "SELECT tipo FROM expedientes_fiscalizacion WHERE tipo<=2406 and tipo>=2000 and anno=".$_SESSION['ANNO_PRO']." AND numero=".$_SESSION['NUM_PRO']." AND sector=1";
+			$tabla1 = mysql_query($consulta1); //AND id_resolucion=0 
+			if (mysql_num_rows($tabla1)>0)
+				{	include "firma.php"; }
+			else { 
+				//include "firma_gerente.php"; 
+				include "firma.php"; 
+				}
+			}
+		else { 
+			include "firma.php"; 
+			}
+		}
+	else { 
+		include "firma.php"; 
+		}
+	
+	//fin alex
+	
+	
+	$pdf->SetFont('Times','B',8);
+	$pdf->SetXY(135,104);
+	$pdf->Cell(85,5,$jefe,0,0,'C');
+	$pdf->SetFont('Times','',6);
+	$pdf->SetXY(135,107);
+	$pdf->Cell(85,5,$cargo,0,0,'C');
+	$pdf->SetXY(135,110);
+	$pdf->Cell(85,5,"Región Los Llanos",0,0,'C');
+	$pdf->SetXY(135,113);
+	$pdf->Cell(85,5,utf8_decode($cedula),0,0,'C');
+	$pdf->SetXY(135,116);
+	$pdf->Cell(85,5,$providencia,0,0,'C');
+	$pdf->SetXY(135,120);
+	$pdf->Cell(85,5,'de fecha '.$fecha_prov,0,0,'C');
+}	
+
+$pdf->Output();
+?>

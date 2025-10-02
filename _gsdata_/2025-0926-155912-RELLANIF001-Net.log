@@ -1,0 +1,41 @@
+2025-09-26 16:00:27: == Sync Started by User Command
+2025-09-26 16:00:28: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-26 16:00:28: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-26 16:00:28: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-26 16:00:28: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-26 16:00:28: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-26 16:00:28: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_bienes_por_reasignar.php' -> '//rellanif023/c$/wamp/www/bienes/11_bienes_por_reasignar.php' (4,985)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_bienes_reasignados.php' -> '//rellanif023/c$/wamp/www/bienes/11_bienes_reasignados.php' (5,078)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_combo.php' -> '//rellanif023/c$/wamp/www/bienes/11_combo.php' (1,467)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/11_guardar.php' -> '//rellanif023/c$/wamp/www/bienes/11_guardar.php' (1,330)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/11_quitar_reasignacion.php' -> '//rellanif023/c$/wamp/www/bienes/11_quitar_reasignacion.php' (901)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/12_bienes_pendientes.php' -> '//rellanif023/c$/wamp/www/bienes/12_bienes_pendientes.php' (6,269)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_combo.php' -> '//rellanif023/c$/wamp/www/bienes/12_combo.php' (1,609)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/11_mov_interno_bien.php' -> '//rellanif023/c$/wamp/www/bienes/11_mov_interno_bien.php' (6,496)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/12_procesar_movimiento.php' -> '//rellanif023/c$/wamp/www/bienes/12_procesar_movimiento.php' (2,853)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/12_mov_interno_sol_bien.php' -> '//rellanif023/c$/wamp/www/bienes/12_mov_interno_sol_bien.php' (2,876)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/13_procesar_aceptacion.php' -> '//rellanif023/c$/wamp/www/bienes/13_procesar_aceptacion.php' (3,611)
+2025-09-26 16:00:28: Copy New 'C:/wamp/www/netlosllanos/bienes/13a_tabla_aceptar.php' -> '//rellanif023/c$/wamp/www/bienes/13a_tabla_aceptar.php' (3,916)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/13aceptar_movimiento.php' -> '//rellanif023/c$/wamp/www/bienes/13aceptar_movimiento.php' (4,229)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/4_bienes_por_reasignar.php' -> '//rellanif023/c$/wamp/www/bienes/4_bienes_por_reasignar.php' (4,548)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/4_combo.php' -> '//rellanif023/c$/wamp/www/bienes/4_combo.php' (4,069)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/4_guardar.php' -> '//rellanif023/c$/wamp/www/bienes/4_guardar.php' (1,683)
+2025-09-26 16:00:28: Copy Over 'C:/wamp/www/netlosllanos/bienes/4reasignacion_bien.php' -> '//rellanif023/c$/wamp/www/bienes/4reasignacion_bien.php' (14,236)
+2025-09-26 16:00:29: Copy Over 'C:/wamp/www/netlosllanos/bienes/5_combo.php' -> '//rellanif023/c$/wamp/www/bienes/5_combo.php' (4,711)
+2025-09-26 16:00:29: Copy Over 'C:/wamp/www/netlosllanos/bienes/5_procesar_reasignacion.php' -> '//rellanif023/c$/wamp/www/bienes/5_procesar_reasignacion.php' (5,591)
+2025-09-26 16:00:29: Copy Over 'C:/wamp/www/netlosllanos/bienes/5a_tabla.php' -> '//rellanif023/c$/wamp/www/bienes/5a_tabla.php' (4,655)
+2025-09-26 16:00:29: Copy Over 'C:/wamp/www/netlosllanos/bienes/5reasignacion_bien.php' -> '//rellanif023/c$/wamp/www/bienes/5reasignacion_bien.php' (9,730)
+2025-09-26 16:00:29: Copy Over 'C:/wamp/www/netlosllanos/bienes/6a_tabla_aceptar.php' -> '//rellanif023/c$/wamp/www/bienes/6a_tabla_aceptar.php' (3,637)
+2025-09-26 16:00:29: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-09-26 16:00:30: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/10ingreso_combo.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/10ingreso_registrar.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/10ingreso_tabla.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/2solicitud_combo.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/2solicitud_index.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/almacen1/index.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/cobro/formatos/autorizacionSIS.php
+2025-09-26 16:00:30: Deleted Recycled: //rellanif023/c$/wamp/www/_gsdata_/_saved_/cobro/formatos/autorizacionSISE.php
+2025-09-26 16:00:31: GsDeleteEmptyFoldersFS: /_gsdata_/_saved_/cobro/formatos
+2025-09-26 16:00:44: == Sync Complete. Time: 00:00:16, Speed: 0.00/s, OK: 22, Errors: 0

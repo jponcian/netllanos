@@ -1,0 +1,149 @@
+/* Igualar altura de select y input en 2solicitud_combo.php */
+#OARTICULO.form-select,
+#OARTICULO.select2,
+#OARTICULO {
+  height: 38px !important;
+  min-height: 38px !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+}
+#OCANTIDAD.form-control,
+#OCANTIDAD {
+  height: 38px !important;
+  min-height: 38px !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+}
+/* Reglas específicas de almacen1
+   - Las reglas generales se mantienen en /estilos/estilos.css
+   - Aquí solo deben ir ajustes y componentes locales al módulo almacen1 */
+
+.swal2-container {
+  z-index: 99999; /* Un valor muy alto para asegurar que esté en la parte superior */
+}
+
+/* Modales personalizados: aprobar, despachar, anular */
+#aprobarModalCustom,
+#despacharModalCustom,
+#anularModalCustom {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  /* negro translúcido */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#aprobarModalCustom.show,
+#despacharModalCustom.show,
+#anularModalCustom.show {
+  display: flex;
+}
+
+#aprobarModalContent,
+#despacharModalContent,
+#anularModalContent {
+  background: #fff;
+  padding: 20px 22px;
+  border-radius: 12px;
+  min-width: 340px;
+  width: 40%;
+  max-width: 540px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(211, 47, 47, 0.18);
+  border-top: 6px solid #d32f2f;
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#aprobarModalHeader,
+#despacharModalHeader,
+#anularModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+#aprobarModalTitle,
+#despacharModalTitle,
+#anularModalTitle {
+  font-weight: 600;
+  color: #d32f2f;
+  font-size: 1.15rem;
+}
+
+#aprobarModalClose,
+#despacharModalClose,
+#anularModalClose {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #d32f2f;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  #aprobarModalContent,
+  #anularModalContent {
+    width: 98vw;
+    min-width: 0;
+    max-width: 99vw;
+  }
+}
+
+/* Ajuste local: margen superior para la lista del carrito dentro del contenedor */
+.container > .list-group.mt-3 {
+  margin-top: 10px !important;
+}
+
+/* Estilos compactos para listado del carrito (específicos de almacen1) */
+.sol-desc {
+  font-size: 0.62rem;
+  line-height: 1.1;
+  max-width: 95%;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* La cantidad en el carrito (solo visual) */
+.cart-qty-display {
+  font-size: 0.88rem;
+  padding: 3px 6px;
+  text-align: right;
+}
+
+/* Botón eliminar - estilos locales (icono más pequeño y en la esquina) */
+.btn-eliminar-art {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 2;
+  padding: 2px 4px;
+  background: transparent;
+  border: none;
+}
+.btn-eliminar-art i.fa-times {
+  color: #dc3545;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.btn-eliminar-art:hover i.fa-times {
+  color: #fff;
+}
+
+/* Fin estilos específicos almacen1 */

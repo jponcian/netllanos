@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>A�adiendo nuevas fuentes y codificaciones</title>
+    <link type="text/css" rel="stylesheet" href="../fpdf.css" />
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #a0a0a0 #000000 #000000 #a0a0a0;
+      }
+      table {
+        margin: 1.4em 0 1.4em 1em;
+      }
+      th {
+        background-color: #e0ebff;
+        color: #900000;
+        text-align: left;
+      }
+      th,
+      td {
+        border: 1px solid #808080;
+        padding: 2px 10px;
+      }
+      tr.alt0 {
+        background-color: #ffffee;
+      }
+      tr.alt1 {
+        background-color: #ffffe0;
+      }
+    </style>
+  </head>
+  <body style="background: transparent !important">
+    <h1>A�adiendo nuevas fuentes y codificaciones</h1>
+    Este tutorial explica c�mo usar fuentes TrueType, OpenType y Type1 de forma
+    que usted no se vea limitado a las fuentes incorporadas en FPDF. El otro
+    punto de inter�s es que pueda elegir la codificaci�n de la fuente, lo que le
+    permitir� usar otros idiomas aparte de los europeos occidentales (ya que las
+    fuentes est�ndar tienen muy pocos caracteres disponibles).
+    <br />
+    <br />
+    Nota: para OpenType, s�lo es compatible el formato basado en TrueType (no
+    as� el basado en el Type1).
+    <br />
+    <br />
+    Existen dos formas de usar una nueva fuente: incluirla en el PDF o no.
+    Cuando una fuente no se incluye, se busca en el sistema. La ventaja es que
+    el fichero PDF es m�s peque�o; sin embargo, si la fuente no est� disponible
+    en el sistema, se usa otra como sustituta. As� que es aconsejable asegurarse
+    de que la fuente en cuesti�n est� instalada en los sistemas de los clientes.
+    Si el fichero est� destinado a una audiencia numerosas, es mejor incluir la
+    fuente.
+    <br />
+    <br />
+    A�adir una nueva fuente requiere dos pasos:
+    <ul>
+      <li>Generaci�n del fichero de definici�n de la fuente</li>
+      <li>Declaraci�n de la fuente en el script</li>
+    </ul>
+    Para Type1, es necesario el archivo AFM correspondiente. Por lo general,
+    �ste es prove�do con la fuente.
+
+    <h2>Generaci�n del fichero de definici�n de la fuente</h2>
+    El primer paso consiste en generar un fichero PHP que contenga toda la
+    informaci�n que necesita FPDF; adem�s, el fichero de la fuente deber�
+    comprimirse. Para hacer esto, se distribuye un script auxiliar en el
+    directorio makefont del paquete: makefont.php. Contiene la siguiente
+    funci�n:
+    <br />
+    <br />
+    <code
+      >MakeFont(<b>string</b> fontfile, [, <b>string</b> enc [,
+      <b>boolean</b> embed]])</code
+    >
+    <dl class="param" style="margin-bottom: 2em">
+      <dt><code>fontfile</code></dt>
+      <dd>
+        <p>Ubicaci�n del fichero .ttf, .otf o .pfb.</p>
+      </dd>
+      <dt><code>enc</code></dt>
+      <dd>
+        <p>
+          Nombre de la codificaci�n. Valor por defecto: <code>cp1252</code>.
+        </p>
+      </dd>
+      <dt><code>embed</code></dt>
+      <dd>
+        <p>
+          Si se incorpora o no la fuente. Valor por defecto: <code>true</code>.
+        </p>
+      </dd>
+    </dl>
+    El primer par�metro es el nombre del fichero de la fuente. La extensi�n debe
+    ser .ttf, .otf o .pfb y determina el tipo de fuente. Si tiene una fuente
+    Type1 en formato ASCII (.pfa), puede convertirla a formato binario (.pfb)
+    con
+    <a href="http://www.lcdf.org/~eddietwo/type/#t1utils" target="_blank"
+      >t1utils</a
+    >.
+    <br />
+    <br />
+    Para las fuentes Type1, el archivo .afm correspondiente debe estar presente
+    en el mismo directorio.
+    <br />
+    <br />
+    La codificaci�n define la asociaci�n entre un c�digo (de 0 a 255) y un
+    car�cter. Los primeros 123 son fijos y se corresponden con los caracteres
+    ASCII; los siguientes son variables. Las codificaciones se almacenan en
+    ficheros .map. Est�n disponibles:
+    <ul>
+      <li>cp1250 (Europa Central)</li>
+      <li>cp1251 (cir�lico)</li>
+      <li>cp1252 (Europa Occidental)</li>
+      <li>cp1253 (griego)</li>
+      <li>cp1254 (turco)</li>
+      <li>cp1255 (hebreo)</li>
+      <li>cp1257 (b�ltico)</li>
+      <li>cp1258 (vietnamita)</li>
+      <li>cp874 (tailand�s)</li>
+      <li>ISO-8859-1 (Europa Occidental)</li>
+      <li>ISO-8859-2 (Europa Central)</li>
+      <li>ISO-8859-4 (b�ltico)</li>
+      <li>ISO-8859-5 (cir�lico)</li>
+      <li>ISO-8859-7 (griego)</li>
+      <li>ISO-8859-9 (turco)</li>
+      <li>ISO-8859-11 (tailand�s)</li>
+      <li>ISO-8859-15 (Europa Occidental)</li>
+      <li>ISO-8859-16 (Europa Central)</li>
+      <li>KOI8-R (ruso)</li>
+      <li>KOI8-U (ucraniano)</li>
+    </ul>
+    Por supuesto, la fuente debe contener los caracteres adecuados a la
+    codificaci�n escogida.
+    <br />
+    <br />
+    Nota: las fuentes est�ndar usan cp1252.
+    <br />
+    <br />
+    Despu�s de llamar a la funci�n (puede crear un nuevo fichero e incluir
+    makefont.php), se crear� un fichero .php con el mismo nombre que la fuente.
+    Puede renombrarlo si lo desea. En caso de incluir la fuente, el fichero se
+    comprime y da lugar a un segundo fichero con extensi�n .z (excepto si la
+    funci�n de compresi�n no est� disponible, puesto que requiere la biblioteca
+    Zlib para PHP). Tambi�n puede renombrarlo, pero, en este caso, tendr� que
+    modificar la variable <code>$file</code> en el fichero .php
+    consecuentemente.
+    <br />
+    <br />
+    Ejemplo:
+    <div class="source">
+      <pre><code>&lt;?php
+<span class="kw">require(</span><span class="str">'makefont/makefont.php'</span><span class="kw">);
+
+</span>MakeFont<span class="kw">(</span><span class="str">'c:\\Windows\\Fonts\\comic.ttf'</span><span class="kw">,</span><span class="str">'cp1252'</span><span class="kw">);
+</span>?&gt;</code></pre>
+    </div>
+    que devuelve los ficheros comic.php y comic.z.
+    <br />
+    <br />
+    Entonces tendr� que copiar los ficheros generados en el directorio de
+    fuentes. Si el fichero de la fuente no pudo ser comprimido, copie la fuente
+    en lugar del .z.
+    <br />
+    <br />
+    Otra forma de invocar a MakeFont() es a trav�s de la l�nea de comandos:
+    <br />
+    <br />
+    <kbd>php makefont\makefont.php c:\Windows\Fonts\comic.ttf cp1252</kbd>
+    <br />
+    <br />
+    Por �ltimo, para las fuentes TrueType y OpenType, tambi�n puede generar los
+    archivos
+    <a href="http://www.fpdf.org/makefont/">en l�nea</a> en lugar de hacerlo
+    manualmente.
+
+    <h2>Declaraci�n de la fuente en el script</h2>
+    El segundo paso es el m�s simple. S�lo necesita llamar al m�todo
+    <a href="../doc/addfont.htm">AddFont()</a>:
+    <div class="source">
+      <pre><code>$pdf<span class="kw">-&gt;</span>AddFont<span class="kw">(</span><span class="str">'Comic'</span><span class="kw">,</span><span class="str">''</span><span class="kw">,</span><span class="str">'comic.php'</span><span class="kw">);
+</span></code></pre>
+    </div>
+    Y la fuente queda disponible (en los estilos normal y subrayado), lista para
+    usar como las otras. Si hubi�ramos trabajado con la Comic Sans MS Bold
+    (comicbd.ttf), hubi�semos escrito:
+    <div class="source">
+      <pre><code>$pdf<span class="kw">-&gt;</span>AddFont<span class="kw">(</span><span class="str">'Comic'</span><span class="kw">,</span><span class="str">'B'</span><span class="kw">,</span><span class="str">'comicbd.php'</span><span class="kw">);
+</span></code></pre>
+    </div>
+
+    <h2>Ejemplo</h2>
+    Veamos ahora un ejemplo completo. Vamos a utilizar la fuente
+    <a href="http://www.abstractfonts.com/font/52" target="_blank"
+      >Calligrapher</a
+    >. El primer paso es la generaci�n de los archivos de la fuente:
+    <div class="source">
+      <pre><code>&lt;?php
+<span class="kw">require(</span><span class="str">'makefont/makefont.php'</span><span class="kw">);
+
+</span>MakeFont<span class="kw">(</span><span class="str">'calligra.ttf'</span><span class="kw">,</span><span class="str">'cp1252'</span><span class="kw">);
+</span>?&gt;</code></pre>
+    </div>
+    El script nos devolver� el siguiente informe:
+    <br />
+    <br />
+    <b>Warning:</b> character Euro is missing<br />
+    <b>Warning:</b> character zcaron is missing<br />
+    Font file compressed: calligra.z<br />
+    Font definition file generated: calligra.php<br />
+    <br />
+    El car�cter del euro no est� en la fuente (es muy antigua). Otro car�cter
+    tampoco se encuentra en la fuente.
+    <br />
+    <br />
+    Alternativamente, podr�amos haber utilizado la l�nea de comandos:
+    <br />
+    <br />
+    <kbd>php makefont\makefont.php calligra.ttf cp1252</kbd>
+    <br />
+    <br />
+    o haber usado el generado en l�nea.
+    <br />
+    <br />
+    Podemos copiar estos dos ficheros en el directorio de fuentes (font) y
+    escribir el script:
+    <div class="source">
+      <pre><code>&lt;?php
+<span class="kw">require(</span><span class="str">'fpdf.php'</span><span class="kw">);
+
+</span>$pdf <span class="kw">= new </span>FPDF<span class="kw">();
+</span>$pdf<span class="kw">-&gt;</span>AddFont<span class="kw">(</span><span class="str">'Calligrapher'</span><span class="kw">,</span><span class="str">''</span><span class="kw">,</span><span class="str">'calligra.php'</span><span class="kw">);
+</span>$pdf<span class="kw">-&gt;</span>AddPage<span class="kw">();
+</span>$pdf<span class="kw">-&gt;</span>SetFont<span class="kw">(</span><span class="str">'Calligrapher'</span><span class="kw">,</span><span class="str">''</span><span class="kw">,</span>35<span class="kw">);
+</span>$pdf<span class="kw">-&gt;</span>Write<span class="kw">(</span>10<span class="kw">,</span><span class="str">'Enjoy new fonts with FPDF!'</span><span class="kw">);
+</span>$pdf<span class="kw">-&gt;</span>Output<span class="kw">();
+</span>?&gt;</code></pre>
+    </div>
+    <p class="demo">
+      <a href="tuto7.php" target="_blank" class="demo">[Demo]</a>
+    </p>
+
+    <h2>Acerca del s�mbolo del euro</h2>
+    El car�cter del euro no aparece en todas las codificaciones, y no siempre
+    est� en la misma posici�n:
+    <table>
+      <tr>
+        <th>Codificaci�n</th>
+        <th>Posici�n</th>
+      </tr>
+      <tr class="alt0">
+        <td>cp1250</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>cp1251</td>
+        <td>136<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>cp1252</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>cp1253</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>cp1254</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>cp1255</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>cp1257</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>cp1258</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>cp874</td>
+        <td>128<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>ISO-8859-1</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>ISO-8859-2</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>ISO-8859-4</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>ISO-8859-5</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>ISO-8859-7</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>ISO-8859-9</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>ISO-8859-11</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>ISO-8859-15</td>
+        <td>164<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>ISO-8859-16</td>
+        <td>164<br /></td>
+      </tr>
+      <tr class="alt0">
+        <td>KOI8-R</td>
+        <td>ausente<br /></td>
+      </tr>
+      <tr class="alt1">
+        <td>KOI8-U</td>
+        <td>ausente<br /></td>
+      </tr>
+    </table>
+    La codificaci�n ISO-8859-1 est� muy extendida, pero no incluye el s�mbolo
+    del euro. Si lo necesita, la soluci�n m�s simple consiste en usar cp1252 o
+    ISO-8859-15, que son pr�cticamente iguales pero contienen el preciado
+    s�mbolo.
+
+    <h2>Reduciendo el tama�o de las fuentes TrueType</h2>
+    Los ficheros de fuentes son con frecuencia bastante voluminosos ; esto se
+    debe a que contienen los caracteres correspondientes a muchas
+    codificaciones. La compresi�n Zlib los reduce, pero contin�an siendo
+    bastante grandes. Existe una t�cnica para reducirlos a�n m�s. Consiste en
+    convertir la fuente a formato Type1 con
+    <a href="http://ttf2pt1.sourceforge.net" target="_blank">ttf2pt1</a> (el
+    ejecutable para Windows est� disponible
+    <a href="http://www.fpdf.org/fr/dl.php?id=22">aqu�</a>) especificando la
+    codificaci�n que le interesa; todos los dem�s caracteres ser�n omitidos.
+    <br />
+    Por ejemplo, la fuente arial.ttf que viene con Windows Vista tiene un tama�o
+    de 748 KB (contiene 3381 caracteres). Despu�s de comprimirla, pesa 411 KB.
+    Convirt�mosla a Type1 manteniendo s�lo los caracteres cp1250:
+    <br />
+    <br />
+    <kbd>ttf2pt1 -b -L cp1250.map c:\Windows\Fonts\arial.ttf arial</kbd>
+    <br />
+    <br />
+    Los ficheros .map est�n en el directorio makefont del paquete. El proceso
+    devuelve arial.pfn y arial.afm. El fichero arial.pfb ocupa s�lo 57 KB, 53 KB
+    despu�s de comprimirlo.
+    <br />
+    <br />
+    Es incluso posible ir m�s all�. Si s�lo est� usted interesado en un
+    subconjunto de la codificaci�n (es probable que no necesite los 217
+    caracteres), puede abrir el fichero .map y quitar las l�neas que no le
+    interesen. Consecuentemente, el tama�o del fichero disminuir�.
+  </body>
+</html>

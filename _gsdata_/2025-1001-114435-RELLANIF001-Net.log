@@ -1,0 +1,12 @@
+2025-10-01 11:44:50: == Sync Started by User Command
+2025-10-01 11:44:50: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-01 11:44:50: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-01 11:44:50: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-10-01 11:44:50: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-01 11:44:50: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-01 11:44:50: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-10-01 11:44:50: Copy Over 'C:/wamp/www/netlosllanos/assets/svg/flake.svg' -> '//rellanif023/c$/wamp/www/assets/svg/flake.svg' (1,016)
+2025-10-01 11:44:50: Copy Over 'C:/wamp/www/netlosllanos/bienes/menuprincipal.php' -> '//rellanif023/c$/wamp/www/bienes/menuprincipal.php' (30,140)
+2025-10-01 11:44:51: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-10-01 11:44:52: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-10-01 11:45:06: == Sync Complete. Time: 00:00:16, Speed: 0.00/s, OK: 2, Errors: 0

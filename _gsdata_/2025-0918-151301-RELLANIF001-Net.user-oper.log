@@ -1,0 +1,18 @@
+2025-09-18 15:13:05: == Sync Started by User Command
+2025-09-18 15:13:05: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-18 15:13:05: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-18 15:13:05: ConnectCloned connected to file:///C:/wamp/www/netlosllanos
+2025-09-18 15:13:05: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-18 15:13:05: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-18 15:13:05: ConnectCloned connected to smb://rellanif023/c$/wamp/www
+2025-09-18 15:13:06: Copy Over 'C:/wamp/www/netlosllanos/index.php' -> '//rellanif023/c$/wamp/www/index.php' (22,579)
+2025-09-18 15:13:06: Copy Over 'C:/wamp/www/netlosllanos/almacen/15articulos.php' -> '//rellanif023/c$/wamp/www/almacen/15articulos.php' (14,305)
+2025-09-18 15:13:06: Copy Over 'C:/wamp/www/netlosllanos/funciones/headNew.php' -> '//rellanif023/c$/wamp/www/funciones/headNew.php' (751)
+2025-09-18 15:13:06: Delete File //rellanif023/c$/wamp/www/jefaturas/administracion.php
+2025-09-18 15:13:06: Copy Over '//rellanif023/c$/wamp/www/submenus/administracion_menu.php' -> 'C:/wamp/www/netlosllanos/submenus/administracion_menu.php' (616) (User Action)
+2025-09-18 15:13:06: Copy Over 'C:/wamp/www/netlosllanos/jefaturas/menuprincipal.php' -> '//rellanif023/c$/wamp/www/jefaturas/menuprincipal.php' (40,364)
+2025-09-18 15:13:06: Copy Over 'C:/wamp/www/netlosllanos/jefaturas/index.php' -> '//rellanif023/c$/wamp/www/jefaturas/index.php' (2,041)
+2025-09-18 15:13:06: Copy New 'C:/wamp/www/netlosllanos/jefaturas/solicitud_detalle.php' -> '//rellanif023/c$/wamp/www/jefaturas/solicitud_detalle.php' (4,972)
+2025-09-18 15:13:06: Save State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
+2025-09-18 15:13:07: Save State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
+2025-09-18 15:13:17: == Sync Complete. Time: 00:00:12, Speed: 0.00/s, OK: 8, Errors: 0
