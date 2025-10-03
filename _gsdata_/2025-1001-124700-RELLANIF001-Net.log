@@ -1,7 +1,0 @@
-2025-10-01 12:47:01: -- Analysis Started by User Command
-2025-10-01 12:47:01: L: Reading State File C:/wamp/www/netlosllanos/_gsdata_/_file_state_v4._gs
-2025-10-01 12:47:04: R: Reading State File //rellanif023/c$/wamp/www/_gsdata_/_file_state_v4._gs
-2025-10-01 12:47:11: R: Reading State File //rellanif023/c$/wamp/www/RESULTADOS_OPERATIVO and merge it with the root state
-2025-10-01 12:47:13: Changes: 2, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 48863
-2025-10-01 12:47:13: Left to Right: Copy File: 2 
-2025-10-01 12:47:13: -- Analysis Complete. Time 00:00:13, Speed: 932 files/s
